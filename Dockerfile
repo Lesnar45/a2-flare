@@ -16,13 +16,13 @@ RUN \
  apk add --no-cache \
 	curl \
 	icu-libs \
-     krb5-libs \
-     libintl \
-     libssl1.1 \
-     libstdc++ \
-     lttng-ust \
-     numactl \
-     zlib && \
+	krb5-libs \
+	libintl \
+	libssl1.1 \
+	libstdc++ \
+	lttng-ust \
+	numactl \
+	zlib && \
  echo "**** install jackett ****" && \
  mkdir -p \
 	/app/Jackett && \
