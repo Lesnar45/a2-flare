@@ -79,7 +79,7 @@ jobs:
           -e "s/${OLD_OVERLAY_VERSION}/${OVERLAY_VERSION}/g" \
           -e "s/${OLD_JACKETT_RELEASE}/${JACKETT_RELEASE}/g" \
           README.md
-        printf '{\n"overlay_version": "'${OVERLAY_VERSION}'",\n"jackett_release": "'${JACKETT_RELEASE}'"\n}' >version_info.json
+        printf '{\n"overlay_version": "'${OVERLAY_VERSION}'",\n"jackett_release": "'${JACKETT_RELEASE}'"\n}\n' >version_info.json
         echo "::set-output name=NEW_MD5::$(md5sum README.md | awk '{ print $1 }')"
 
     - name: Stage README.md Changes
