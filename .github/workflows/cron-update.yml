@@ -57,22 +57,21 @@ jobs:
         docker run --rm --entrypoint '/bin/sh' -v "$PWD":/tmp "$DOCKERHUB_IMAGE":cibuild -c '\
           apk info -v | sort >/tmp/package_versions.txt'
         echo "::set-output name=NEW_MD5::$(md5sum package_versions.txt | awk '{ print $1 }')"
-        echo "::set-output name=OLD_RADARR_RELEASE::$(cat version_info.json | jq -r .radarr_release)"
 
     - name: Update README.md
       id: readme
       env:
-        RADARR_RELEASE: ${{ steps.variables.outputs.RADARR_RELEASE }}
+        JACKETT_RELEASE: ${{ steps.variables.outputs.JACKETT_RELEASE }}
       run: |
         echo "::set-output name=OLD_MD5::$(md5sum README.md | awk '{ print $1 }')"
         OVERLAY_VERSION=$(curl -sX GET "https://raw.githubusercontent.com/hydazz/docker-baseimage-alpine/main/version_info.json" | jq -r .overlay_version)
         OLD_OVERLAY_VERSION=$(cat version_info.json | jq -r .overlay_version)
-        OLD_RADARR_RELEASE=$(cat version_info.json | jq -r .radarr_release)
+        OLD_JACKETT_RELEASE=$(cat version_info.json | jq -r .jackett_release)
         sed -i \
           -e "s/${OLD_OVERLAY_VERSION}/${OVERLAY_VERSION}/g" \
-          -e "s/${OLD_RADARR_RELEASE}/${RADARR_RELEASE}/g" \
+          -e "s/${OLD_JACKETT_RELEASE}/${JACKETT_RELEASE}/g" \
           README.md
-        printf '{\n"overlay_version": "'${OVERLAY_VERSION}'",\n"radarr_release": "'${RADARR_RELEASE}'"\n}' >version_info.json
+        printf '{\n"overlay_version": "'${OVERLAY_VERSION}'",\n"jackett_release": "'${JACKETT_RELEASE}'"\n}' >version_info.json
         echo "::set-output name=NEW_MD5::$(md5sum README.md | awk '{ print $1 }')"
 
     - name: Stage README.md Changes
@@ -111,7 +110,7 @@ jobs:
         repository: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
 
     - name: Tag And Push Docker Image
-      if: steps.packages.outputs.OLD_RADARR_RELEASE == steps.variables.outputs.RADARR_RELEASE
+      if: steps.push_packageversions.outputs.COMMIT == 1
       env:
         DOCKERHUB_IMAGE: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
         DOCKERIMAGE_TAG: ${{ steps.variables.outputs.DOCKERIMAGE_TAG }}
