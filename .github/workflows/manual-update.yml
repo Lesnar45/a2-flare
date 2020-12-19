@@ -68,17 +68,17 @@ jobs:
     - name: Update README.md
       id: readme
       env:
-        JACKETT_RELEASE: ${{ steps.variables.outputs.JACKETT_RELEASE }}
+        RADARR_RELEASE: ${{ steps.variables.outputs.RADARR_RELEASE }}
       run: |
         echo "::set-output name=OLD_MD5::$(md5sum README.md | awk '{ print $1 }')"
         OVERLAY_VERSION=$(curl -sX GET "https://raw.githubusercontent.com/hydazz/docker-baseimage-alpine/main/version_info.json" | jq -r .overlay_version)
         OLD_OVERLAY_VERSION=$(cat version_info.json | jq -r .overlay_version)
-        OLD_JACKETT_RELEASE=$(cat version_info.json | jq -r .jackett_release)
+        OLD_RADARR_RELEASE=$(cat version_info.json | jq -r .radarr_release)
         sed -i \
           -e "s/${OLD_OVERLAY_VERSION}/${OVERLAY_VERSION}/g" \
-          -e "s/${OLD_JACKETT_RELEASE}/${JACKETT_RELEASE}/g" \
+          -e "s/${OLD_RADARR_RELEASE}/${RADARR_RELEASE}/g" \
           README.md
-        printf '{\n"overlay_version": "'${OVERLAY_VERSION}'",\n"jackett_release": "'${JACKETT_RELEASE}'"\n}' >version_info.json
+        printf '{\n"overlay_version": "'${OVERLAY_VERSION}'",\n"radarr_release": "'${RADARR_RELEASE}'"\n}' >version_info.json
         echo "::set-output name=NEW_MD5::$(md5sum README.md | awk '{ print $1 }')"
 
     - name: Stage README.md Changes
