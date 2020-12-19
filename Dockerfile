@@ -4,7 +4,7 @@ FROM vcxpz/baseimage-alpine
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Fork of Linuxserver.io version:- ${VERSION} Build date:- ${BUILD_DATE}"
-LABEL maintainer="hydaz"
+LABEL maintainer="Alex Hyde"
 
 # environment settings
 ARG JACKETT_RELEASE
@@ -12,7 +12,7 @@ ENV XDG_DATA_HOME="/config" \
 XDG_CONFIG_HOME="/config"
 
 RUN \
- echo "**** install packages ****" && \
+ echo "**** install runtime packages ****" && \
  apk add --no-cache \
 	curl \
 	icu-libs \
