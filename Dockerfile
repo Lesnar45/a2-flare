@@ -1,3 +1,27 @@
+# build jackett for musl
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS dotnet
+
+# environment settings
+ARG JACKETT_RELEASE
+
+RUN \
+   cd /tmp && \
+   wget -O- https://github.com/Jackett/Jackett/archive/${JACKETT_RELEASE}.tar.gz \
+      | tar xz --strip-components=1 && \
+   cd src && \
+   printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >Jackett.Server/runtimeconfig.template.json && \
+   dotnet publish Jackett.Server -f net5.0 --self-contained -c Release -r linux-musl-x64 /p:TrimUnusedDependencies=true /p:PublishTrimmed=true -o /out && \
+   echo "**** cleanup ****" && \
+   apk --no-cache add \
+      binutils && \
+   cd /out && \
+   rm -f *.pdb && \
+   chmod +x jackett && \
+   strip -s /out/*.so
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# runtime stage
 FROM vcxpz/baseimage-alpine
 
 # set version label
@@ -7,33 +31,17 @@ LABEL build_version="Fork of Linuxserver.io version:- ${VERSION} Build-date:- ${
 LABEL maintainer="Alex Hyde"
 
 # environment settings
-ARG JACKETT_RELEASE
-ENV XDG_DATA_HOME="/config" \
-XDG_CONFIG_HOME="/config"
+ENV XDG_CONFIG_HOME="/config"
+
+COPY --from=dotnet /out /app/Jackett
 
 RUN \
    echo "**** install runtime packages ****" && \
    apk add --no-cache \
-      curl \
-      icu-libs \
-      krb5-libs \
-      libintl \
-      libssl1.1 \
+      libcurl \
+      libgcc \
       libstdc++ \
-      lttng-ust \
-      numactl \
-      zlib && \
-   echo "**** install jackett ****" && \
-   mkdir -p \
-      /app/Jackett && \
-   curl -o \
-   /tmp/jacket.tar.gz -L \
-      "https://github.com/Jackett/Jackett/releases/download/${JACKETT_RELEASE}/Jackett.Binaries.LinuxAMDx64.tar.gz" && \
-   tar xzf \
-   /tmp/jacket.tar.gz -C \
-      /app/Jackett --strip-components=1 && \
-   echo "**** fix for host id mapping error ****" && \
-   chown -R root:root /app/Jackett && \
+      libintl && \
    echo "**** save docker image version ****" && \
    echo "${VERSION}" > /etc/docker-image && \
    echo "**** cleanup ****" && \
@@ -42,6 +50,10 @@ RUN \
 
 # add local files
 COPY root/ /
+
+# jackett healthcheck
+HEALTHCHECK --start-period=10s --timeout=5s \
+    CMD wget -qO /dev/null 'http://localhost:9117/torznab/all'
 
 # ports and volumes
 VOLUME /config
