@@ -13,6 +13,7 @@ docker run -d \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Australia/Melbourne \
+  -e DEBUG=true/false `#optional` \
   -p 9117:9117 \
   -v <path to appdata>:/config \
   -v <path to blackhole>:/downloads \
@@ -22,6 +23,7 @@ docker run -d \
 
 ## Credits
 * [spritsail/jackett](https://github.com/spritsail/jackett) for the [dotnet build snipped](https://github.com/spritsail/jackett/blob/e7c72dc80489210b774fc8ab67666cc4cc03c9d8/Dockerfile#L8-L19) and the `HEALTHCHECK` command
+* [hotio](https://github.com/hotio) for the `redirect_cmd` function
 
 ## Todo
 * Nothing, everything works 🙂
