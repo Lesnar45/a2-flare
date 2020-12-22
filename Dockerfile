@@ -12,33 +12,33 @@ ENV XDG_DATA_HOME="/config" \
 XDG_CONFIG_HOME="/config"
 
 RUN \
- echo "**** install runtime packages ****" && \
- apk add --no-cache \
-	curl \
-	icu-libs \
-	krb5-libs \
-	libintl \
-	libssl1.1 \
-	libstdc++ \
-	lttng-ust \
-	numactl \
-	zlib && \
- echo "**** install jackett ****" && \
- mkdir -p \
-	/app/Jackett && \
- curl -o \
- /tmp/jacket.tar.gz -L \
-	"https://github.com/Jackett/Jackett/releases/download/${JACKETT_RELEASE}/Jackett.Binaries.LinuxAMDx64.tar.gz" && \
- tar xzf \
- /tmp/jacket.tar.gz -C \
-	/app/Jackett --strip-components=1 && \
- echo "**** fix for host id mapping error ****" && \
- chown -R root:root /app/Jackett && \
- echo "**** save docker image version ****" && \
- echo "${VERSION}" > /etc/docker-image && \
- echo "**** cleanup ****" && \
- rm -rf \
-	/tmp/*
+   echo "**** install runtime packages ****" && \
+   apk add --no-cache \
+      curl \
+      icu-libs \
+      krb5-libs \
+      libintl \
+      libssl1.1 \
+      libstdc++ \
+      lttng-ust \
+      numactl \
+      zlib && \
+   echo "**** install jackett ****" && \
+   mkdir -p \
+      /app/Jackett && \
+   curl -o \
+   /tmp/jacket.tar.gz -L \
+      "https://github.com/Jackett/Jackett/releases/download/${JACKETT_RELEASE}/Jackett.Binaries.LinuxAMDx64.tar.gz" && \
+   tar xzf \
+   /tmp/jacket.tar.gz -C \
+      /app/Jackett --strip-components=1 && \
+   echo "**** fix for host id mapping error ****" && \
+   chown -R root:root /app/Jackett && \
+   echo "**** save docker image version ****" && \
+   echo "${VERSION}" > /etc/docker-image && \
+   echo "**** cleanup ****" && \
+   rm -rf \
+      /tmp/*
 
 # add local files
 COPY root/ /
