@@ -25,7 +25,6 @@ jobs:
         echo "::set-output name=GIT_BRANCH::$GIT_BRANCH"
         echo "::set-output name=DOCKERHUB_IMAGE::$DOCKERHUB_IMAGE"
         echo "::set-output name=DOCKERIMAGE_TAG::$DOCKERIMAGE_TAG"
-        echo "::set-output name=VERSION::$(curl -sX GET "https://api.github.com/repos/linuxserver/$GIT_REPO/releases/latest" | jq -r .tag_name)"
         echo "::set-output name=JACKETT_RELEASE::$(curl -sX GET "https://api.github.com/repos/Jackett/Jackett/releases/latest"| jq -r .tag_name)"
 
     - name: Docker Login
@@ -43,11 +42,10 @@ jobs:
 
     - name: Build The Docker Image
       env:
-        VERSION: ${{ steps.variables.outputs.VERSION }}
         DOCKERHUB_IMAGE: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
         JACKETT_RELEASE: ${{ steps.variables.outputs.JACKETT_RELEASE }}
       run: |
-        docker build --no-cache --pull . --file Dockerfile --build-arg JACKETT_RELEASE="$JACKETT_RELEASE" --build-arg VERSION="$VERSION" --build-arg BUILD_DATE="$(date +%Y-%m-%d)" --tag "$DOCKERHUB_IMAGE":cibuild
+        docker build --no-cache --pull . --file Dockerfile --build-arg JACKETT_RELEASE="$JACKETT_RELEASE" --build-arg BUILD_DATE="$(date +%Y-%m-%d)" --tag "$DOCKERHUB_IMAGE":cibuild
 
     - name: Get New Package Versions From Image
       id: packages
