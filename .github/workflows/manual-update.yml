@@ -5,11 +5,9 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '**/README.md'
-      - '**/package_versions.txt'
-      - '**/version_info.json'
-      - '.github/**'
+    paths:
+      - '**/Dockerfile'
+      - 'root/**'
 
 jobs:
   amd64:
@@ -68,16 +66,8 @@ jobs:
       env:
         JACKETT_RELEASE: ${{ steps.variables.outputs.JACKETT_RELEASE }}
       run: |
-        JACKETT_RELEASE=$(echo $JACKETT_RELEASE | cut -c 2-)
         echo "::set-output name=OLD_MD5::$(md5sum README.md | awk '{ print $1 }')"
-        OVERLAY_VERSION=$(curl -sX GET "https://raw.githubusercontent.com/hydazz/docker-baseimage-alpine/main/version_info.json" | jq -r .overlay_version)
-        OLD_OVERLAY_VERSION=$(cat version_info.json | jq -r .overlay_version)
-        OLD_JACKETT_RELEASE=$(cat version_info.json | jq -r .jackett_release)
-        sed -i \
-          -e "s/${OLD_OVERLAY_VERSION}/${OVERLAY_VERSION}/g" \
-          -e "s/${OLD_JACKETT_RELEASE}/${JACKETT_RELEASE}/g" \
-          README.md
-        printf '{\n"overlay_version": "'${OVERLAY_VERSION}'",\n"jackett_release": "'${JACKETT_RELEASE}'"\n}' >version_info.json
+        chmod +x update_version_info.sh && ./update_version_info.sh
         echo "::set-output name=NEW_MD5::$(md5sum README.md | awk '{ print $1 }')"
 
     - name: Commit And Push Changes To Github
