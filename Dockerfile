@@ -37,7 +37,7 @@ COPY --from=dotnet /out /app/Jackett
 
 RUN \
    echo "**** install runtime packages ****" && \
-   apk add --no-cache \
+   apk add --no-cache --upgrade \
       libcurl \
       libgcc \
       libstdc++ \
