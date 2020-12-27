@@ -1,5 +1,5 @@
 # build jackett for musl
-FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS dotnet
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS builder
 
 # environment settings
 ARG JACKETT_RELEASE
@@ -33,7 +33,7 @@ LABEL maintainer="Alex Hyde"
 # environment settings
 ENV XDG_CONFIG_HOME="/config"
 
-COPY --from=dotnet /out /app/Jackett
+COPY --from=builder /out /app/Jackett
 
 RUN \
    echo "**** install runtime packages ****" && \
