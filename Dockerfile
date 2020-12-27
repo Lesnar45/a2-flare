@@ -6,7 +6,7 @@ ARG JACKETT_RELEASE
 
 RUN \
    cd /tmp && \
-   wget -O- https://github.com/Jackett/Jackett/archive/${JACKETT_RELEASE}.tar.gz \
+   wget -O- https://github.com/Jackett/Jackett/archive/v${JACKETT_RELEASE}.tar.gz \
       | tar xz --strip-components=1 && \
    cd src && \
    printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >Jackett.Server/runtimeconfig.template.json && \
