@@ -42,6 +42,8 @@ RUN \
       libgcc \
       libstdc++ \
       libintl && \
+   echo "**** save docker image version ****" && \
+   echo "v${JACKETT_RELEASE}" > /etc/docker-image && \
    echo "**** cleanup ****" && \
    rm -rf \
       /tmp/*
