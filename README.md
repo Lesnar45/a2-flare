@@ -4,7 +4,7 @@
 [![docker hub](https://img.shields.io/badge/docker_hub-link-blue?style=for-the-badge&logo=docker)](https://hub.docker.com/repository/docker/vcxpz/jackett) ![docker image size](https://img.shields.io/docker/image-size/vcxpz/jackett?style=for-the-badge&logo=docker) [![auto build](https://img.shields.io/badge/auto_build-daily-blue?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-jackett/actions?query=workflow%3A%22Cron+Update+CI%22)
 
 ## Version Information
-![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![s6 overlay](https://img.shields.io/badge/s6_overlay-2.1.0.2-blue?style=for-the-badge) ![jackett](https://img.shields.io/badge/jackett-0.17.159-blue?style=for-the-badge)
+![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![s6 overlay](https://img.shields.io/badge/s6_overlay-2.1.0.2-blue?style=for-the-badge) ![jackett](https://img.shields.io/badge/jackett-0.17.166-blue?style=for-the-badge)
 
 ## Usage
 ```
