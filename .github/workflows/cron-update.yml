@@ -14,15 +14,9 @@ jobs:
       - name: Set Enviroment Variables
         id: variables
         env:
-          GIT_USER: hydazz
-          GIT_REPO: docker-jackett
-          GIT_BRANCH: main
           DOCKERHUB_IMAGE: vcxpz/jackett
           DOCKERIMAGE_TAG: latest
         run: |
-          echo "::set-output name=GIT_USER::$GIT_USER"
-          echo "::set-output name=GIT_REPO::$GIT_REPO"
-          echo "::set-output name=GIT_BRANCH::$GIT_BRANCH"
           echo "::set-output name=DOCKERHUB_IMAGE::$DOCKERHUB_IMAGE"
           echo "::set-output name=DOCKERIMAGE_TAG::$DOCKERIMAGE_TAG"
           echo "::set-output name=JACKETT_RELEASE::$(curl -sX GET "https://api.github.com/repos/Jackett/Jackett/releases/latest"| jq -r .tag_name | cut -c 2-)"
@@ -38,7 +32,7 @@ jobs:
           GIT_USER: ${{ steps.variables.outputs.GIT_USER }}
         run: |
           git config --global user.email "alexanderhyde@icloud.com"
-          git config --global user.name "$GIT_USER"
+          git config --global user.name "hydazz"
 
       - name: Build The Docker Image
         env:
@@ -68,16 +62,11 @@ jobs:
           echo "::set-output name=NEW_MD5::$(md5sum README.md | awk '{ print $1 }')"
 
       - name: Commit And Push Changes To Github
-        if: steps.variables.outputs.JACKETT_RELEASE != steps.packages.outputs.OLD_JACKETT_RELEASE
-        env:
-          GIT_USER: ${{ steps.variables.outputs.GIT_USER }}
-          GIT_REPO: ${{ steps.variables.outputs.GIT_REPO }}
-          GIT_BRANCH: ${{ steps.variables.outputs.GIT_BRANCH }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: steps.variables.outputs.JACKETT_RELEASE != steps.packages.outputs.OLD_JACKETT_RELEASE`
         run: |
           git add -A
           git commit -m 'Bot Updating Files'
-          git push https://"$GIT_USER":"$GITHUB_TOKEN"@github.com/"$GIT_USER"/"$GIT_REPO".git $GIT_BRANCH
+          git push
 
       - name: Tag And Push Docker Image
         if: steps.variables.outputs.JACKETT_RELEASE != steps.packages.outputs.OLD_JACKETT_RELEASE
