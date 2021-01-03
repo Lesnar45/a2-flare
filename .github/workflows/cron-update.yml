@@ -62,7 +62,7 @@ jobs:
           echo "::set-output name=NEW_MD5::$(md5sum README.md | awk '{ print $1 }')"
 
       - name: Commit And Push Changes To Github
-        if: steps.variables.outputs.JACKETT_RELEASE != steps.packages.outputs.OLD_JACKETT_RELEASE`
+        if: steps.variables.outputs.JACKETT_RELEASE != steps.packages.outputs.OLD_JACKETT_RELEASE
         run: |
           git add -A
           git commit -m 'Bot Updating Files'
