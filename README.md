@@ -20,6 +20,7 @@ docker run -d \
   --restart unless-stopped \
   vcxpz/jackett
 ```
+On Unraid? There's a [template](https://github.com/hydazz/docker-templates/blob/main/hydaz/jackett.xml)
 
 ## Credits
 * [spritsail/jackett](https://github.com/spritsail/jackett) for the [dotnet build snipped](https://github.com/spritsail/jackett/blob/e7c72dc80489210b774fc8ab67666cc4cc03c9d8/Dockerfile#L8-L19) and the `HEALTHCHECK` command
