@@ -33,8 +33,6 @@ LABEL maintainer="Alex Hyde"
 # environment settings
 ENV XDG_CONFIG_HOME="/config"
 
-COPY --from=builder /out /app/Jackett
-
 RUN \
    echo "**** install runtime packages ****" && \
    apk add --no-cache --upgrade \
@@ -45,6 +43,9 @@ RUN \
    echo "**** cleanup ****" && \
    rm -rf \
       /tmp/*
+
+# copy files from builder
+COPY --from=builder /out /app/Jackett
 
 # add local files
 COPY root/ /
