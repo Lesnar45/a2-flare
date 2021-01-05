@@ -8,6 +8,6 @@ redirect_cmd() {
 	fi
 }
 
-redirect_cmd exec \
-	s6-setuidgid abc /app/Jackett/jackett \
+redirect_cmd exec s6-setuidgid abc \
+	/app/Jackett/jackett \
 	-x -d /config --NoUpdates
