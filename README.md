@@ -7,6 +7,7 @@ Fork of [linuxserver/docker-jackett](https://github.com/linuxserver/docker-jacke
 
 ## Version Information
 ![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![s6 overlay](https://img.shields.io/badge/s6_overlay-2.1.0.2-blue?style=for-the-badge) ![jackett](https://img.shields.io/badge/jackett-0.17.197-blue?style=for-the-badge)
+
 **[See here for a list of packages](https://github.com/hydazz/docker-jackett/blob/main/package_versions.txt)**
 
 ## Usage
