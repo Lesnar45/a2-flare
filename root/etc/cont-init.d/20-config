@@ -6,8 +6,7 @@ if [ -d /config/Jackett ]; then
 	rm -rf /config/Jackett
 fi
 
+# permissions
 chown -R abc:abc \
-	/config
-
-chown -R abc:abc \
+	/config \
 	/app/Jackett
