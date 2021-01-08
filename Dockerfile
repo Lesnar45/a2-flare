@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS builder
 # environment settings
 ARG VERSION
 
-RUN \
+RUN set -x && \
    cd /tmp && \
    wget -O- https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz \
       | tar xz --strip-components=1 && \
@@ -17,7 +17,8 @@ RUN \
    cd /out && \
    rm -f *.pdb && \
    chmod +x jackett && \
-   strip -s /out/*.so
+   strip -s /out/*.so && \
+   echo "**** done building jackett ****"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -33,7 +34,7 @@ LABEL maintainer="hydaz"
 # environment settings
 ENV XDG_CONFIG_HOME="/config"
 
-RUN \
+RUN set -x && \
    echo "**** install runtime packages ****" && \
    apk add --no-cache --upgrade \
       libcurl \
