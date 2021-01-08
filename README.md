@@ -26,11 +26,17 @@ docker run -d \
 ```
 On Unraid? There's a [template](https://github.com/hydazz/docker-templates/blob/main/hydaz/jackett.xml)
 
+## New Environment Variables
+### Debug
+| Name | Description | Default Value |
+|-|-|-|
+| `DEBUG` | set `true` to display errors in the Docker logs. When set to `false` the Docker log is completely muted. | `false` |
+
+**See other variables on the official [README](https://github.com/linuxserver/docker-jackett/)**
+
 ## Upgrading Jackett
 To upgrade, all you have to do is pull our latest Docker image. We automatically check for Jackett updates daily so there may be some delay when an update is released to when the image is updated.
 
 ## Credits
 * [spritsail/jackett](https://github.com/spritsail/jackett) for the [dotnet build snipped](https://github.com/spritsail/jackett/blob/e7c72dc80489210b774fc8ab67666cc4cc03c9d8/Dockerfile#L8-L19) and the `HEALTHCHECK` command
 * [hotio](https://github.com/hotio) for the `redirect_cmd` function
-
-**Read the official [README](https://github.com/linuxserver/docker-jackett/) for more information**
