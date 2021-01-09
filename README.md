@@ -24,7 +24,7 @@ docker run -d \
   --restart unless-stopped \
   vcxpz/jackett
 ```
-[![auto build](https://img.shields.io/badge/unraid_template-ff8c2f?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-templates/blob/main/hydaz/jackett.xml)
+[![template](https://img.shields.io/badge/unraid_template-ff8c2f?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-templates/blob/main/hydaz/jackett.xml)
 
 ## New Environment Variables
 ### Debug
