@@ -8,6 +8,7 @@ redirect_cmd() {
 	fi
 }
 
+echo "Starting Jackett."
 redirect_cmd exec s6-setuidgid abc \
 	/app/Jackett/jackett \
 	-x \
