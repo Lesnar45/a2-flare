@@ -23,7 +23,7 @@ RUN set -xe && \
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # runtime stage
-FROM vcxpz/baseimage-alpine-dotnet
+FROM vcxpz/baseimage-alpine
 
 # set version label
 ARG BUILD_DATE
@@ -35,6 +35,12 @@ LABEL maintainer="hydaz"
 ENV XDG_CONFIG_HOME="/config"
 
 RUN set -xe && \
+   echo "**** install runtime packages ****" && \
+   apk add --no-cache --upgrade \
+      libcurl \
+      libgcc \
+      libstdc++ \
+      libintl && \
    echo "**** cleanup ****" && \
    rm -rf \
       /tmp/*
