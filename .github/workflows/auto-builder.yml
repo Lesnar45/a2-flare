@@ -59,10 +59,10 @@ jobs:
         run: |
           docker build \
             --platform=${PLATFORMS} \
-            --output "type=image,push=false" \
+            --output "type=image,push=true" \
             --build-arg JACKETT_RELEASE=${JACKETT_RELEASE} \
             --tag ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:cibuild \
-            --file Dockerfile.test .
+            --file Dockerfile .
 
       - name: Test The Docker Image
         run: |

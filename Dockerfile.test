@@ -1,4 +1,0 @@
-FROM alpine:edge
-RUN set -ex && \
-echo $(arch) && \
-echo $(cat /etc/apk/arch)
