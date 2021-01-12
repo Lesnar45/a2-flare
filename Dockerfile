@@ -2,11 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS builder
 
 # environment settings
-ARG VERSION
+ARG JACKETT_RELEASE
 
 RUN set -xe && \
    cd /tmp && \
-   wget -O- https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz \
+   wget -O- https://github.com/Jackett/Jackett/archive/v${JACKETT_RELEASE}.tar.gz \
       | tar xz --strip-components=1 && \
    cd src && \
    printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >Jackett.Server/runtimeconfig.template.json && \
@@ -27,8 +27,8 @@ FROM vcxpz/baseimage-alpine
 
 # set version label
 ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="Jackett version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+ARG JACKETT_RELEASE
+LABEL build_version="Jackett version:- ${JACKETT_RELEASE} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
 # environment settings
