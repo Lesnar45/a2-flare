@@ -1,14 +1,10 @@
 # build jackett for musl
-FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS builder
+FROM vcxpz/baseimage-ubuntu-dotnet AS builder
 
 # environment settings
 ARG JACKETT_RELEASE
 
 RUN set -xe && \
-   apt-get update && \
-   apt-get install -y \
-      binutils \
-      musl-tools && \
    cd /tmp && \
    wget -O- https://github.com/Jackett/Jackett/archive/v${JACKETT_RELEASE}.tar.gz \
       | tar xz --strip-components=1 && \
