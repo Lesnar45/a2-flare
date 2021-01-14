@@ -1,5 +1,5 @@
 # build jackett for musl
-FROM vcxpz/baseimage-ubuntu-dotnet AS builder
+FROM vcxpz/baseimage-ubuntu-dotnet:latest AS builder
 
 # environment settings
 ARG JACKETT_RELEASE
@@ -22,7 +22,7 @@ RUN set -xe && \
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # runtime stage
-FROM vcxpz/baseimage-alpine
+FROM vcxpz/baseimage-alpine:latest
 
 # set version label
 ARG BUILD_DATE

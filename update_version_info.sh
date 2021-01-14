@@ -2,8 +2,8 @@
 
 OVERLAY_VERSION=$(curl -sX GET "https://raw.githubusercontent.com/hydazz/docker-baseimage-alpine/main/version_info.json" | jq -r .overlay_version)
 
-OLD_OVERLAY_VERSION=$(cat version_info.json | jq -r .overlay_version)
-OLD_JACKETT_RELEASE=$(cat version_info.json | jq -r .jackett_release)
+OLD_OVERLAY_VERSION=$(jq <version_info.json -r .overlay_version)
+OLD_JACKETT_RELEASE=$(jq <version_info.json -r .jackett_release)
 
 sed -i \
 	-e "s/${OLD_OVERLAY_VERSION}/${OVERLAY_VERSION}/g" \
