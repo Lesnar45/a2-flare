@@ -10,7 +10,7 @@ RUN set -xe && \
       | tar xz --strip-components=1 && \
    cd src && \
    printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >Jackett.Server/runtimeconfig.template.json && \
-   ARCH=$(curl -sSL https://raw.githubusercontent.com/hydazz/scripts/main/docker/archer.sh | bash) && \
+   ARCH=$(curl -sSL https://raw.githubusercontent.com/hydazz/scripts/main/docker/jackett-archer.sh | bash) && \
    dotnet publish Jackett.Server -f net5.0 --self-contained -c Release -r linux-musl-${ARCH} /p:TrimUnusedDependencies=true /p:PublishTrimmed=true -o /out && \
    echo "**** cleanup ****" && \
    cd /out && \
