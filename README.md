@@ -1,6 +1,6 @@
 ## docker-jackett
 
-[![docker hub](https://img.shields.io/badge/docker_hub-link-blue?style=for-the-badge&logo=docker)](https://hub.docker.com/r/vcxpz/jackett) ![docker image size](https://img.shields.io/docker/image-size/vcxpz/jackett?style=for-the-badge&logo=docker) [![auto build](https://img.shields.io/badge/docker_builds-automated-blue?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-jackett/actions?query=workflow%3A"Auto+Builder+CI") [![codacy branch grade](https://img.shields.io/codacy/grade/2ddd07b48fe346bf85845f4b653fc0fb/main?style=for-the-badge)](https://app.codacy.com/gh/hydazz/docker-jackett)
+[![docker hub](https://img.shields.io/badge/docker_hub-link-blue?style=for-the-badge&logo=docker)](https://hub.docker.com/r/vcxpz/jackett) ![docker image size](https://img.shields.io/docker/image-size/vcxpz/jackett?style=for-the-badge&logo=docker) [![auto build](https://img.shields.io/badge/docker_builds-automated-blue?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-jackett/actions?query=workflow%3A"Auto+Builder+CI") [![codacy branch grade](https://img.shields.io/codacy/grade/2ddd07b48fe346bf85845f4b653fc0fb/main?style=for-the-badge&logo=codacy)](https://app.codacy.com/gh/hydazz/docker-jackett)
 
 Fork of [linuxserver/docker-jackett](https://github.com/linuxserver/docker-jackett/)
 
@@ -10,7 +10,7 @@ Fork of [linuxserver/docker-jackett](https://github.com/linuxserver/docker-jacke
 
 ![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![s6 overlay](https://img.shields.io/badge/s6_overlay-2.1.0.2-blue?style=for-the-badge) ![jackett](https://img.shields.io/badge/jackett-0.17.284-blue?style=for-the-badge)
 
-**[See here for a list of packages](https://github.com/hydazz/docker-jackett/blob/main/package_versions.txt)**
+See [package_versions.txt](package_versions.txt) for a full list of the packages and package versions used in this image
 
 ## Usage
 
