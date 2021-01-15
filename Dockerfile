@@ -5,17 +5,18 @@ FROM vcxpz/baseimage-ubuntu-dotnet:latest AS builder
 ARG JACKETT_RELEASE
 
 RUN set -xe && \
-   cd /tmp && \
-   wget -O- https://github.com/Jackett/Jackett/archive/v${JACKETT_RELEASE}.tar.gz \
-      | tar xz --strip-components=1 && \
-   cd src && \
-   printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >Jackett.Server/runtimeconfig.template.json && \
+   curl --silent -o \
+      /tmp/jackett.tar.gz -L \
+      "https://github.com/Jackett/Jackett/archive/v${JACKETT_RELEASE}.tar.gz" && \
+   tar xzf \
+      /tmp/jackett.tar.gz -C \
+      /tmp/ --strip-components=1 && \
+   printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >/tmp/src/Jackett.Server/runtimeconfig.template.json && \
    ARCH=$(curl -sSL https://raw.githubusercontent.com/hydazz/scripts/main/docker/jackett-archer.sh | bash) && \
-   dotnet publish Jackett.Server -f net5.0 --self-contained -c Release -r linux-musl-${ARCH} /p:TrimUnusedDependencies=true /p:PublishTrimmed=true -o /out && \
+   dotnet publish /tmp/src/Jackett.Server -f net5.0 --self-contained -c Release -r linux-musl-${ARCH} /p:TrimUnusedDependencies=true /p:PublishTrimmed=true -o /out && \
    echo "**** cleanup ****" && \
-   cd /out && \
-   rm -f *.pdb && \
-   chmod +x jackett && \
+   rm -f /out/*.pdb && \
+   chmod +x /out/jackett && \
    strip -s /out/*.so && \
    echo "**** done building jackett ****"
 
