@@ -4,7 +4,7 @@ FROM vcxpz/baseimage-ubuntu-dotnet:latest AS builder
 # environment settings
 ARG VERSION
 
-RUN set -xe && \
+RUN \
    curl --silent -o \
       /tmp/jackett.tar.gz -L \
       "https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
@@ -34,7 +34,7 @@ LABEL maintainer="hydaz"
 # environment settings
 ENV XDG_CONFIG_HOME="/config"
 
-RUN set -xe && \
+RUN \
    echo "**** install runtime packages ****" && \
    apk add --no-cache --upgrade \
       libcurl \
