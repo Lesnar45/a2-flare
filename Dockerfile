@@ -6,11 +6,11 @@ ARG VERSION
 
 RUN \
    curl --silent -o \
-      /tmp/jackett.tar.gz -L \
-      "https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
+     /tmp/jackett.tar.gz -L \
+     "https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
    tar xzf \
-      /tmp/jackett.tar.gz -C \
-      /tmp/ --strip-components=1 && \
+     /tmp/jackett.tar.gz -C \
+     /tmp/ --strip-components=1 && \
    printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >/tmp/src/Jackett.Server/runtimeconfig.template.json && \
    ARCH=$(curl -sSL https://raw.githubusercontent.com/hydazz/scripts/main/docker/archer.sh | bash) && \
    dotnet publish /tmp/src/Jackett.Server -f net5.0 --self-contained -c Release -r linux-musl-${ARCH} /p:TrimUnusedDependencies=true /p:PublishTrimmed=true -o /out && \
@@ -37,13 +37,13 @@ ENV XDG_CONFIG_HOME="/config"
 RUN \
    echo "**** install runtime packages ****" && \
    apk add --no-cache --upgrade \
-      libcurl \
-      libgcc \
-      libstdc++ \
-      libintl && \
+     libcurl \
+     libgcc \
+     libstdc++ \
+     libintl && \
    echo "**** cleanup ****" && \
    rm -rf \
-      /tmp/*
+     /tmp/*
 
 # copy files from builder
 COPY --from=builder /out /app/Jackett
