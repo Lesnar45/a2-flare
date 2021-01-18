@@ -1,6 +1,7 @@
 #!/bin/bash
 
 OVERLAY_VERSION=$(curl -sX GET "https://raw.githubusercontent.com/hydazz/docker-baseimage-alpine/main/version_info.json" | jq -r .overlay_version)
+JACKETT_RELEASE=${APP_VERSION}
 
 OLD_OVERLAY_VERSION=$(jq <version_info.json -r .overlay_version)
 OLD_JACKETT_RELEASE=$(jq <version_info.json -r .jackett_release)

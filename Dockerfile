@@ -2,12 +2,12 @@
 FROM vcxpz/baseimage-ubuntu-dotnet:latest AS builder
 
 # environment settings
-ARG JACKETT_RELEASE
+ARG VERSION
 
 RUN set -xe && \
    curl --silent -o \
       /tmp/jackett.tar.gz -L \
-      "https://github.com/Jackett/Jackett/archive/v${JACKETT_RELEASE}.tar.gz" && \
+      "https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
    tar xzf \
       /tmp/jackett.tar.gz -C \
       /tmp/ --strip-components=1 && \
@@ -27,8 +27,8 @@ FROM vcxpz/baseimage-alpine:latest
 
 # set version label
 ARG BUILD_DATE
-ARG JACKETT_RELEASE
-LABEL build_version="Jackett version:- ${JACKETT_RELEASE} Build-date:- ${BUILD_DATE}"
+ARG VERSION
+LABEL build_version="Jackett version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
 # environment settings
