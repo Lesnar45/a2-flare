@@ -2,7 +2,6 @@
 FROM vcxpz/baseimage-ubuntu-dotnet:focal AS builder
 
 # environment settings
-ARG TAG
 ARG VERSION
 
 RUN \
@@ -24,7 +23,7 @@ RUN \
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # runtime stage
-FROM vcxpz/baseimage-alpine:${TAG}
+FROM vcxpz/baseimage-alpine:edge
 
 # set version label
 ARG BUILD_DATE
