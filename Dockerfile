@@ -1,5 +1,5 @@
 # build jackett for musl
-FROM vcxpz/baseimage-ubuntu-dotnet:latest AS builder
+FROM vcxpz/baseimage-ubuntu-dotnet:focal AS builder
 
 # environment settings
 ARG VERSION
@@ -23,7 +23,8 @@ RUN \
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # runtime stage
-FROM vcxpz/baseimage-alpine:latest
+ARG TAG
+FROM vcxpz/baseimage-alpine:${TAG}
 
 # set version label
 ARG BUILD_DATE
