@@ -8,7 +8,7 @@ Fork of [linuxserver/docker-jackett](https://github.com/linuxserver/docker-jacke
 
 ## Version Information
 
-![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![jackett](https://img.shields.io/badge/jackett-0.17.337-blue?style=for-the-badge)
+![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![jackett](https://img.shields.io/badge/jackett-0.17.343-blue?style=for-the-badge)
 
 See [package_versions.txt](package_versions.txt) for a full list of the packages and package versions used in this image
 
