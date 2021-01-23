@@ -31,9 +31,6 @@ ARG VERSION
 LABEL build_version="Jackett version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
-# environment settings
-ENV XDG_CONFIG_HOME="/config"
-
 RUN \
    echo "**** install runtime packages ****" && \
    apk add --no-cache --upgrade \
