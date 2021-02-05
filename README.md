@@ -40,3 +40,7 @@ To upgrade, all you have to do is pull the latest Docker image. We automatically
 
 -   [spritsail/jackett](https://github.com/spritsail/jackett) for the [dotnet build snipped](https://github.com/spritsail/jackett/blob/e7c72dc80489210b774fc8ab67666cc4cc03c9d8/Dockerfile#L8-L19) and the `HEALTHCHECK` command
 -   [hotio](https://github.com/hotio) for the `redirect_cmd` function
+
+## Fixing Appdata Permissions
+
+If you ever accidentally screw up the permissions on the appdata folder, run fix-perms within the container. This will restore most of the files/folders with the correct permissions.
