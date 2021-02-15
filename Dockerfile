@@ -5,6 +5,9 @@ FROM vcxpz/baseimage-ubuntu-dotnet:focal AS builder
 ARG VERSION
 
 RUN \
+	if [ -z ${VERSION+x} ]; then \
+		VERSION=$(curl -sX GET "https://api.github.com/repos/Jackett/Jackett/releases/latest"| jq -r .tag_name | cut -c 2-); \
+	fi && \
 	curl --silent -o \
 	/tmp/jackett.tar.gz -L \
 	"https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
