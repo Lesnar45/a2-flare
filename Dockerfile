@@ -6,7 +6,7 @@ ARG VERSION
 
 RUN \
 	if [ -z ${VERSION+x} ]; then \
-		VERSION=$(curl -sX GET "https://api.github.com/repos/Jackett/Jackett/releases/latest"| jq -r .tag_name | cut -c 2-); \
+		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest"| jq -r .tag_name | cut -c 2-); \
 	fi && \
 	curl --silent -o \
 	/tmp/jackett.tar.gz -L \

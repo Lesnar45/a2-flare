@@ -43,7 +43,7 @@ jobs:
             --platform=amd64 \
             --output "type=docker" \
             --build-arg BUILD_DATE="$(date +%Y-%m-%d)" \
-            --build-arg VERSION=$(curl -sX GET "https://api.github.com/repos/hydazz/docker-jackett/releases/latest" | jq -r .tag_name) \
+            --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-jackett/releases/latest" | jq -r '.tag_name') \
             --tag vcxpz/ci-build:ci-build \
             --file Dockerfile .
 
@@ -58,8 +58,8 @@ jobs:
             --platform=linux/amd64 \
             --output "type=image,push=true" \
             --build-arg BUILD_DATE="$(date +%Y-%m-%d)" \
-            --build-arg VERSION=$(curl -sX GET "https://api.github.com/repos/hydazz/docker-jackett/releases/latest" | jq -r .tag_name) \
-            --tag vcxpz/jackett:$(curl -sX GET "https://api.github.com/repos/hydazz/docker-jackett/releases/latest" | jq -r .tag_name) \
+            --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-jackett/releases/latest" | jq -r '.tag_name') \
+            --tag vcxpz/jackett:$(curl -sL "https://api.github.com/repos/hydazz/docker-jackett/releases/latest" | jq -r '.tag_name') \
             --tag vcxpz/jackett:latest \
             --file Dockerfile .
 
