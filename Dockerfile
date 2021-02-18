@@ -1,5 +1,5 @@
 # build jackett for musl
-FROM vcxpz/baseimage-ubuntu-dotnet:focal AS builder
+FROM vcxpz/baseimage-ubuntu-dotnet:latest AS builder
 
 # environment settings
 ARG VERSION
