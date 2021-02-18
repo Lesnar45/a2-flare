@@ -26,7 +26,7 @@ docker run -d \
 
 ## New Environment Variables
 
-#### Debug
+### Debug
 
 | Name    | Description                                                                                              | Default Value |
 | ------- | -------------------------------------------------------------------------------------------------------- | ------------- |
@@ -40,8 +40,8 @@ To upgrade, all you have to do is pull the latest Docker image. We automatically
 
 ## Credits
 
-- [spritsail/jackett](https://github.com/spritsail/jackett) for the [dotnet build snipped](https://github.com/spritsail/jackett/blob/e7c72dc80489210b774fc8ab67666cc4cc03c9d8/Dockerfile##L8-L19) and the `HEALTHCHECK` command
-- [hotio](https://github.com/hotio) for the `redirect_cmd` function
+-   [spritsail/jackett](https://github.com/spritsail/jackett) for the [dotnet build snipped](https://github.com/spritsail/jackett/blob/e7c72dc80489210b774fc8ab67666cc4cc03c9d8/Dockerfile##L8-L19) and the `HEALTHCHECK` command
+-   [hotio](https://github.com/hotio) for the `redirect_cmd` function
 
 ## Fixing Appdata Permissions
 
