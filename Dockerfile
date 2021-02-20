@@ -15,7 +15,11 @@ RUN \
 		/tmp/jackett.tar.gz -C \
 		/tmp/ --strip-components=1 && \
 	printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >/tmp/src/Jackett.Server/runtimeconfig.template.json && \
-	ARCH=$(curl -sSL https://raw.githubusercontent.com/hydazz/docker-utils/main/docker/archer.sh | bash) && \
+	if [ "$(arch)" = "x86_64" ]; then \
+		ARCH="x64"; \
+	elif [ "$(arch)" == "aarch64" ]; then \
+		ARCH="arm64"; \
+	fi && \
 	dotnet publish /tmp/src/Jackett.Server -f net5.0 --self-contained -c Release -r linux-musl-${ARCH} /p:TrimUnusedDependencies=true /p:PublishTrimmed=true -o /out && \
 	echo "**** cleanup ****" && \
 	rm -f /out/*.pdb && \
