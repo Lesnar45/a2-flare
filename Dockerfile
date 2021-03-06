@@ -6,21 +6,28 @@ ARG VERSION
 
 RUN \
 	if [ -z ${VERSION+x} ]; then \
-		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest"| jq -r .tag_name | cut -c 2-); \
+		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest" | jq -r .'tag_name' | cut -c 2-); \
 	fi && \
 	curl --silent -o \
-	/tmp/jackett.tar.gz -L \
-	"https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
+		/tmp/jackett.tar.gz -L \
+		"https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
 	tar xzf \
 		/tmp/jackett.tar.gz -C \
 		/tmp/ --strip-components=1 && \
-	printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >/tmp/src/Jackett.Server/runtimeconfig.template.json && \
 	if [ "$(arch)" = "x86_64" ]; then \
 		ARCH="x64"; \
 	elif [ "$(arch)" == "aarch64" ]; then \
 		ARCH="arm64"; \
 	fi && \
-	dotnet publish /tmp/src/Jackett.Server -f net5.0 --self-contained -c Release -r linux-musl-${ARCH} /p:TrimUnusedDependencies=true /p:PublishTrimmed=true -o /out && \
+	printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >/tmp/src/Jackett.Server/runtimeconfig.template.json && \
+	dotnet publish /tmp/src/Jackett.Server \
+		-f net5.0 \
+		--self-contained \
+		-c Release \
+		-r linux-musl-${ARCH} \
+		/p:TrimUnusedDependencies=true \
+		/p:PublishTrimmed=true \
+		-o /out && \
 	echo "**** cleanup ****" && \
 	rm -f /out/*.pdb && \
 	chmod +x /out/jackett && \
@@ -50,7 +57,7 @@ RUN \
 		/tmp/*
 
 # copy files from builder
-COPY --from=builder /out /app/Jackett
+COPY --from=builder /out /app/jackett
 
 # add local files
 COPY root/ /

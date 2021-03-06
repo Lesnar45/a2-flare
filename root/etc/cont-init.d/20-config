@@ -9,4 +9,4 @@ fi
 # permissions
 chown -R abc:abc \
 	/config \
-	/app/Jackett
+	/app/jackett
