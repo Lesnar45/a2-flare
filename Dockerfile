@@ -1,10 +1,16 @@
 # build jackett for musl
-FROM vcxpz/baseimage-ubuntu-dotnet:latest AS builder
+FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS builder
 
 # environment settings
 ARG VERSION
 
 RUN \
+	echo "**** install runtime packages ****" && \
+	apt-get update && \
+	apt-get install -y \
+		binutils \
+		musl-tools \
+          jq && \
 	if [ -z ${VERSION+x} ]; then \
 		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest" | jq -r .'tag_name' | cut -c 2-); \
 	fi && \
