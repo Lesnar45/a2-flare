@@ -14,17 +14,20 @@ RUN \
 	if [ -z ${VERSION+x} ]; then \
 		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest" | jq -r .'tag_name' | cut -c 2-); \
 	fi && \
+	echo "**** download jackett ****" && \
 	curl --silent -o \
 		/tmp/jackett.tar.gz -L \
 		"https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
 	tar xzf \
 		/tmp/jackett.tar.gz -C \
 		/tmp/ --strip-components=1 && \
+	echo "**** determine architecture ****" && \
 	if [ "$(arch)" = "x86_64" ]; then \
 		ARCH="x64"; \
 	elif [ "$(arch)" == "aarch64" ]; then \
 		ARCH="arm64"; \
 	fi && \
+	echo "**** build jackett ****" && \
 	printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >/tmp/src/Jackett.Server/runtimeconfig.template.json && \
 	dotnet publish /tmp/src/Jackett.Server \
 		-f net5.0 \
