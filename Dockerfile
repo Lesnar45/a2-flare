@@ -10,7 +10,7 @@ RUN \
 	apt-get install -y \
 		binutils \
 		musl-tools \
-          jq && \
+		jq && \
 	if [ -z ${VERSION+x} ]; then \
 		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest" | jq -r .'tag_name' | cut -c 2-); \
 	fi && \
