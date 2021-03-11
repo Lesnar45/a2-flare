@@ -24,8 +24,10 @@ RUN \
 	echo "**** determine architecture ****" && \
 	if [ "$(arch)" = "x86_64" ]; then \
 		ARCH="x64"; \
-	elif [ "$(arch)" == "aarch64" ]; then \
+	elif [ "$(arch)" = "aarch64" ]; then \
 		ARCH="arm64"; \
+	else \
+		exit 1; \
 	fi && \
 	echo "**** build jackett ****" && \
 	printf '{\n"configProperties": {\n"System.Globalization.Invariant": true\n}\n}' >/tmp/src/Jackett.Server/runtimeconfig.template.json && \
