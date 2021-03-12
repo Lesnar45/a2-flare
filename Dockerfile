@@ -58,7 +58,7 @@ LABEL maintainer="hydaz"
 
 RUN \
 	echo "**** install runtime packages ****" && \
-	apk add --no-cache --upgrade \
+	apk add --no-cache \
 		libcurl \
 		libgcc \
 		libstdc++ \
