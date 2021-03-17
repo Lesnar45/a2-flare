@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS builder
 # environment settings
 ARG VERSION
 
-RUN \
+RUN set -xe && \
 	echo "**** install runtime packages ****" && \
 	apt-get update && \
 	apt-get install -y \
@@ -15,7 +15,7 @@ RUN \
 		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest" | jq -r .'tag_name' | cut -c 2-); \
 	fi && \
 	echo "**** download jackett ****" && \
-	curl --silent -o \
+	curl -o \
 		/tmp/jackett.tar.gz -L \
 		"https://github.com/Jackett/Jackett/archive/v${VERSION}.tar.gz" && \
 	tar xzf \
@@ -56,7 +56,7 @@ ARG VERSION
 LABEL build_version="Jackett version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
-RUN \
+RUN set -xe && \
 	echo "**** install runtime packages ****" && \
 	apk add --no-cache \
 		libcurl \
