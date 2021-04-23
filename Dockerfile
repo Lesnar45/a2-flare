@@ -11,7 +11,7 @@ RUN set -xe && \
 		binutils \
 		musl-tools \
 		jq && \
-	if [ -z ${VERSION+x} ]; then \
+	if [ -z ${VERSION} ]; then \
 		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest" | jq -r .'tag_name' | cut -c 2-); \
 	fi && \
 	echo "**** download jackett ****" && \
