@@ -20,15 +20,11 @@ jobs:
           echo "${TOKEN}" | gh auth login --with-token
           runs=$(gh api repos/hydazz/docker-jackett/actions/runs | jq -r .total_count)
           while true; do
-          	if [[ $(gh api repos/hydazz/docker-jackett/actions/runs | jq -r .total_count) != 0 ]]; then
-          		if [[ $(gh api repos/hydazz/docker-jackett/actions/runs | jq -r .total_count) != "$runs" ]]; then
-          			echo "not all runs deleted, running again"
-          		fi
+          	if [[ $(gh api repos/hydazz/docker-jackett/actions/runs | jq -r .total_count) -gt 2 ]]; then
           		gh api repos/hydazz/docker-jackett/actions/runs \
-          			--paginate -q '.workflow_runs[] | "\(.id)"' |
-          			xargs -n1 -I % gh api repos/hydazz/docker-jackett/actions/runs/% -X DELETE
+          			--paginate -q '.workflow_runs[] | "\(.id)"' | \
+          			xargs -n1 -I % gh api repos/hydazz/docker-jackett/actions/runs/% -X DELETE || true
           	else
-          		echo "Deleted $runs runs"
-          		exit
+          		exit 0
           	fi
           done
