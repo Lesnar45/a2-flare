@@ -17,7 +17,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
-          echo ${TOKEN} | gh auth login --with-token
+          echo "${TOKEN}" | gh auth login --with-token
           runs=$(gh api repos/hydazz/docker-jackett/actions/runs | jq -r .total_count)
           while true; do
           	if [[ $(gh api repos/hydazz/docker-jackett/actions/runs | jq -r .total_count) != 0 ]]; then
