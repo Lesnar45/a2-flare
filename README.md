@@ -2,7 +2,7 @@
 
 [![docker hub](https://img.shields.io/badge/docker_hub-link-blue?style=for-the-badge&logo=docker)](https://hub.docker.com/r/vcxpz/jackett) ![docker image size](https://img.shields.io/docker/image-size/vcxpz/jackett?style=for-the-badge&logo=docker) [![auto build](https://img.shields.io/badge/docker_builds-automated-blue?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-jackett/actions?query=workflow%3A"Auto+Builder+CI")
 
-Fork of [linuxserver/docker-jackett](https://github.com/linuxserver/docker-jackett/) (Equivalent to v0.18.225-ls32)
+Fork of [linuxserver/docker-jackett](https://github.com/linuxserver/docker-jackett/) (Equivalent to v0.18.599-ls40)
 
 [Jackett](https://github.com/Jackett/Jackett) works as a proxy server: it translates queries from apps (Sonarr, SickRage, CouchPotato, Mylar, etc) into tracker-site-specific http queries, parses the html response, then sends results back to the requesting software. This allows for getting recent uploads (like RSS) and performing searches. Jackett is a single repository of maintained indexer scraping & translation logic - removing the burden from other apps.
 
