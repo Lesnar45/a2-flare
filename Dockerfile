@@ -73,10 +73,6 @@ COPY --from=builder /out /app/jackett
 # add local files
 COPY root/ /
 
-# jackett healthcheck
-HEALTHCHECK --start-period=10s --timeout=5s \
-	CMD wget -qO /dev/null 'http://localhost:9117/torznab/all'
-
 # ports and volumes
 VOLUME /config
 EXPOSE 9117
