@@ -9,8 +9,8 @@ RUN set -xe && \
 	apt-get update && \
 	apt-get install -y \
 		binutils \
-		musl-tools \
-		jq && \
+		jq \
+		musl-tools && \
 	if [ -z ${VERSION} ]; then \
 		VERSION=$(curl -sL "https://api.github.com/repos/Jackett/Jackett/releases/latest" | jq -r .'tag_name' | cut -c 2-); \
 	fi && \
@@ -61,8 +61,8 @@ RUN set -xe && \
 	apk add --no-cache \
 		libcurl \
 		libgcc \
-		libstdc++ \
-		libintl && \
+		libintl \
+		libstdc++ && \
 	echo "**** cleanup ****" && \
 	rm -rf \
 		/tmp/*
