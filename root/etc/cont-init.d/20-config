@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+# may prevent some headaches
+if [ -d /config/Jackett ]; then
+	mv /config/Jackett/* /config
+	rm -rf /config/Jackett
+fi
+
+# permissions
+chown -R abc:abc \
+	/config \
+	/app/jackett
