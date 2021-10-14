@@ -79,5 +79,6 @@ COPY root/ /
 
 # ports and volumes
 VOLUME /config
+ARG PORT
 EXPOSE 9117
 EXPOSE $PORT
