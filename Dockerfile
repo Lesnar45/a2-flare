@@ -81,6 +81,6 @@ COPY root/ /
 # ports and volumes
 VOLUME /config
 ARG PORT
-EXPOSE 9117
+EXPOSE 8080
 EXPOSE $PORT
 CMD ["npm", "start"]
