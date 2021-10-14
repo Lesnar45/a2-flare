@@ -56,6 +56,7 @@ ENV LOG_LEVEL=info
 EXPOSE 8080
 
 ARG BUILD_DATE
+USER root
 ARG VERSION
 LABEL build_version="Jackett version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
