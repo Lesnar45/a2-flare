@@ -49,7 +49,7 @@ RUN set -xe && \
 FROM flaresolverr/flaresolverr
 ENV LOG_LEVEL=info
 EXPOSE 8080
-RUN npm start &
+CMD ["npm", "start"]
 
 # runtime stage
 FROM vcxpz/baseimage-alpine:latest
