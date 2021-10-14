@@ -46,6 +46,10 @@ RUN set -xe && \
 	echo "**** done building jackett ****"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+FROM flaresolverr/flaresolverr
+ENV LOG_LEVEL=info
+EXPOSE 8080
+RUN npm start &
 
 # runtime stage
 FROM vcxpz/baseimage-alpine:latest
@@ -76,3 +80,4 @@ COPY root/ /
 # ports and volumes
 VOLUME /config
 EXPOSE 9117
+EXPOSE $PORT
