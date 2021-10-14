@@ -46,15 +46,15 @@ RUN set -xe && \
 	echo "**** done building jackett ****"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-FROM flaresolverr/flaresolverr
-ENV LOG_LEVEL=info
-EXPOSE 8080
-CMD ["npm", "start"]
+
+
 
 # runtime stage
-FROM vcxpz/baseimage-alpine:latest
-
+FROM flaresolverr/flaresolverr
 # set version label
+ENV LOG_LEVEL=info
+EXPOSE 8080
+
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Jackett version:- ${VERSION} Build-date:- ${BUILD_DATE}"
@@ -82,3 +82,4 @@ VOLUME /config
 ARG PORT
 EXPOSE 9117
 EXPOSE $PORT
+CMD ["npm", "start"]
