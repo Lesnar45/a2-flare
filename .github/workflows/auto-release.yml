@@ -4,8 +4,7 @@ name: Auto Release CI
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "20 * * * 1-6"
+  
 
 jobs:
   check-for-updates:
